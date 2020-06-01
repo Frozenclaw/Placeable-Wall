@@ -32,8 +32,8 @@ Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
 
 class 'Wall' (ScriptActor)
-Wall.kMapName = 'Wall'
-Wall.kModelName = PrecacheAsset('models/marine/armory/armory.model') -- using armory model for testing purposes
+Wall.kMapName = 'wall'
+Wall.kModelName = PrecacheAsset("models/props/eclipse/eclipse_wallmods01_03.model")
 
 local networkVars = {}
 
@@ -59,34 +59,27 @@ AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
 
-function Wall:OnCreate(self)
-	
-	ScriptActor.OnCreate(self)
-	
-	InitMixin(self, BaseModelMixin)
-    InitMixin(self, ClientModelMixin)
+function Wall:OnCreate()
+
+    ScriptActor.OnCreate(self)
+    
+    InitMixin(self, BaseModelMixin)
+    InitMixin(self, ModelMixin)
     InitMixin(self, LiveMixin)
-    InitMixin(self, GameEffectsMixin)
-    InitMixin(self, FlinchMixin, { kPlayFlinchAnimations = true })
     InitMixin(self, TeamMixin)
-    InitMixin(self, PointGiverMixin)
-    InitMixin(self, AchievementGiverMixin)
-    InitMixin(self, SelectableMixin)
-    InitMixin(self, EntityChangeMixin)
-    InitMixin(self, LOSMixin)
-    InitMixin(self, CorrodeMixin)
     InitMixin(self, ConstructMixin)
+    InitMixin(self, EntityChangeMixin)
     InitMixin(self, ResearchMixin)
     InitMixin(self, RecycleMixin)
-    InitMixin(self, RagdollMixin)
-    InitMixin(self, ObstacleMixin)
-    InitMixin(self, DissolveMixin)
-    InitMixin(self, GhostStructureMixin)
     InitMixin(self, CombatMixin)
-    InitMixin(self, PowerConsumerMixin)
-    InitMixin(self, ParasiteMixin)
-	
-	self:SetPhysicsType(PhysicsType.Kinematic)
+    InitMixin(self, SelectableMixin)
+    InitMixin(self, GhostStructureMixin)
+    InitMixin(self, PointGiverMixin)
+
+    self:SetPhysicsType(PhysicsType.Kinematic)
+
+    
+   
 
 end
 
@@ -134,7 +127,7 @@ function Wall:GetDamagedAlertId()
 end 
 
 function Wall:GetHealthBarOffset()
-	return .5
+	return 
 end 
 
 if server then 
