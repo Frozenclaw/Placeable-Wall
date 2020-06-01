@@ -1,0 +1,4 @@
+modEntry = {
+	FileHooks = "lua/PlaceableWall/FileHooks.lua",
+	Priority = 35
+}
