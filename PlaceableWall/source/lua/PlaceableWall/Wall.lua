@@ -83,33 +83,22 @@ function Wall:OnCreate()
 
 end
 
-
 function Wall:OnInitialized()
-	
+	 
 	ScriptActor.OnInitialized(self)
-	
 	InitMixin(self, WeldableMixin)
 	InitMixin(self, NanoShieldMixin)
-	
-	
 	self:SetModel(Wall.kModelName)
     
-    self:SetPhysicsType(PhysicsType.Kinematic)
+	if Server then 
 	
-	if server then 
-		
 		if not HasMixin(self, 'MapBlip') then
 			InitMixin(self, MapBlipMixin)
 		end 
-		
-		InitMixin(self, StaticTargetMixin)
-        InitMixin(self, InfestationTrackerMixin)
         
-	elseif client then
-	
+	elseif Client then
 		InitMixin(self, UnitStatusMixin)
 		InitMixin(self, HiveVisionMixin)
-		
 	end 
 	
 end 
@@ -126,20 +115,21 @@ function Wall:GetDamagedAlertId()
 	return kTechId.MarineAlertStructureUnderAttack
 end 
 
-function Wall:GetHealthBarOffset()
-	return 
-end 
 
-if server then 
+function Wall:GetHealthbarOffset()
+    return gArmoryHealthHeight
+end
+
+if Server then 
 
 	function Wall:OnKill()
 	
-		self.TriggerEffects('death')
+		self:TriggerEffects('death')
 		DestroyEntity(self)
 	
 	end
 	
 end 
 
-Shared.LinkClassToMap("Wall", Wall.kMapName, networkVars)
+Shared.LinkClassToMap('Wall', Wall.kMapName, networkVars)
 	

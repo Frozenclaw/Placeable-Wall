@@ -12,6 +12,7 @@ function BuildTechData()
 		[kTechDataRequiresPower] = false,
 		[kTechDataMapName] = Wall.kMapName,
 		[kTechDataDisplayName] = 'WALL',
+		[kTechDataSpecifyOrientation] = true,
 		[kTechDataCostKey] = 10,
 		[kTechDataBuildTime] = 2,
 		[kTechDataMaxHealth] = 2000,
